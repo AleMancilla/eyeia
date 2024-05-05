@@ -1,4 +1,5 @@
 import 'package:eye_ia_detection/presentation/home/home_screen.dart';
+import 'package:eye_ia_detection/presentation/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -31,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
     await Future.delayed(Duration(seconds: 5)); // Simula carga de datos
 
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        context, MaterialPageRoute(builder: (context) => OnboardingScreen()));
   }
 
   @override
