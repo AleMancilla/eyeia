@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "820228445896",
+    "project_id": "demointegration-64533",
+    "storage_bucket": "demointegration-64533.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820228445896:android:d8bf4dff35b6d12b1a77fd",
+        "android_client_info": {
+          "package_name": "com.example.eye_ia_detection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820228445896-qchq9r7iea08q0j6f63ej30b33k96vfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqu6Neb6v0HLrSEyzQiULpqI67Md3VEAc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820228445896-qchq9r7iea08q0j6f63ej30b33k96vfm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

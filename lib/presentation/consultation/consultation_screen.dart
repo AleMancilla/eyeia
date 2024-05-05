@@ -1,3 +1,4 @@
+import 'package:eye_ia_detection/presentation/eye/eye_screen.dart';
 import 'package:eye_ia_detection/presentation/global_controller.dart';
 import 'package:eye_ia_detection/presentation/ui/atoms/custom_button_widget.dart';
 import 'package:eye_ia_detection/presentation/ui/atoms/custom_text_file.dart';
@@ -40,8 +41,8 @@ class ConsultationScreen extends StatelessWidget {
               CustomButtonWidget(
                 textButton: 'Continuar',
                 onTap: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EyeScreen()));
                 },
               ),
             ],
