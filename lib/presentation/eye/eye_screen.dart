@@ -27,7 +27,8 @@ class _EyeScreenState extends State<EyeScreen> {
   final picker = ImagePicker();
 
   Future<File?> getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.getImage(
+        source: ImageSource.camera, preferredCameraDevice: CameraDevice.front);
 
     if (pickedFile != null) {
       return File(pickedFile.path);
@@ -183,47 +184,46 @@ class _EyeScreenState extends State<EyeScreen> {
                       controller.imageEyeRigth == null) {
                     showToastMessage('Por favor complete las fotos');
                   } else {
-                    // excecuteProcess(context, () async {
-                    //   // controller.imageUrl1 =
-                    //   //     await uploadImage(controller.imageEyeCenter);
-                    //   if (controller.imageEyeCenter != null) {
-                    //     final contents =
-                    //         controller.imageEyeCenter!.readAsBytesSync();
-                    //     final encondedContents = base64.encode(contents);
-                    //     controller.prediction1 = await controller
-                    //         .makePostRequestWithBase64(encondedContents);
-                    //   }
-                    //   if (controller.imageEyeUp != null) {
-                    //     final contents =
-                    //         controller.imageEyeUp!.readAsBytesSync();
-                    //     final encondedContents = base64.encode(contents);
-                    //     controller.prediction2 = await controller
-                    //         .makePostRequestWithBase64(encondedContents);
-                    //   }
-                    //   // if (controller.imageEyeButtom != null) {
-                    //   //   final contents =
-                    //   //       controller.imageEyeButtom!.readAsBytesSync();
-                    //   //   final encondedContents = base64.encode(contents);
-                    //   //   controller.prediction3 = await controller
-                    //   //       .makePostRequestWithBase64(encondedContents);
-                    //   // }
-                    //   // if (controller.imageEyeleft != null) {
-                    //   //   final contents =
-                    //   //       controller.imageEyeleft!.readAsBytesSync();
-                    //   //   final encondedContents = base64.encode(contents);
-                    //   //   controller.prediction4 = await controller
-                    //   //       .makePostRequestWithBase64(encondedContents);
-                    //   // }
-                    //   // if (controller.imageEyeRigth != null) {
-                    //   //   final contents =
-                    //   //       controller.imageEyeRigth!.readAsBytesSync();
-                    //   //   final encondedContents = base64.encode(contents);
-                    //   //   controller.prediction5 = await controller
-                    //   //       .makePostRequestWithBase64(encondedContents);
-                    //   // }
-                    //   print(controller);
-
-                    // });
+                    excecuteProcess(context, () async {
+                      // controller.imageUrl1 =
+                      //     await uploadImage(controller.imageEyeCenter);
+                      if (controller.imageEyeCenter != null) {
+                        final contents =
+                            controller.imageEyeCenter!.readAsBytesSync();
+                        final encondedContents = base64.encode(contents);
+                        controller.prediction1 = await controller
+                            .makePostRequestWithBase64(encondedContents);
+                      }
+                      if (controller.imageEyeUp != null) {
+                        final contents =
+                            controller.imageEyeUp!.readAsBytesSync();
+                        final encondedContents = base64.encode(contents);
+                        controller.prediction2 = await controller
+                            .makePostRequestWithBase64(encondedContents);
+                      }
+                      // if (controller.imageEyeButtom != null) {
+                      //   final contents =
+                      //       controller.imageEyeButtom!.readAsBytesSync();
+                      //   final encondedContents = base64.encode(contents);
+                      //   controller.prediction3 = await controller
+                      //       .makePostRequestWithBase64(encondedContents);
+                      // }
+                      // if (controller.imageEyeleft != null) {
+                      //   final contents =
+                      //       controller.imageEyeleft!.readAsBytesSync();
+                      //   final encondedContents = base64.encode(contents);
+                      //   controller.prediction4 = await controller
+                      //       .makePostRequestWithBase64(encondedContents);
+                      // }
+                      // if (controller.imageEyeRigth != null) {
+                      //   final contents =
+                      //       controller.imageEyeRigth!.readAsBytesSync();
+                      //   final encondedContents = base64.encode(contents);
+                      //   controller.prediction5 = await controller
+                      //       .makePostRequestWithBase64(encondedContents);
+                      // }
+                      print(controller);
+                    });
 
                     Navigator.push(
                         context,

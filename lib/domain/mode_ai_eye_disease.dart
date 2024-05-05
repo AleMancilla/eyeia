@@ -103,7 +103,7 @@ class Prediction {
       };
 
   Map<String, dynamic> toJsonForChatGPT() => {
-        "confidence": confidence,
-        "class": predictionClass,
+        "probabilidad": confidence,
+        "clase": predictionClass,
       };
 }

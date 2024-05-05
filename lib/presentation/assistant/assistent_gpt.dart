@@ -26,6 +26,8 @@ class _SupportGptScreenState extends State<AssistentGpt> {
 
   @override
   Widget build(BuildContext context) {
+    print(gptController);
+
     Size sizeScreen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -43,6 +45,7 @@ class _SupportGptScreenState extends State<AssistentGpt> {
                   ],
                 ),
               ),
+
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Obx(() => Row(
@@ -70,6 +73,17 @@ class _SupportGptScreenState extends State<AssistentGpt> {
                     )),
               ),
               // CustomLoadingWidget(),
+              if (gptController.listMessageToShow.length > 0)
+                SingleChildScrollView(
+                  child: Row(
+                    children: [
+                      suggestWidget(
+                          'Puedes ayudarme a contactar especialistas?'),
+                      suggestWidget(
+                          'Quiero que me des recomendaciones sobre cuidados'),
+                    ],
+                  ),
+                ),
               if (gptController.waitingResponse.value) CustomLoadingWidget(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -90,6 +104,27 @@ class _SupportGptScreenState extends State<AssistentGpt> {
               ),
             ],
           )),
+    );
+  }
+
+  Widget suggestWidget(String suggest) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+      child: InkWell(
+        onTap: () {
+          gptController.addWidgetMessage('user', suggest);
+        },
+        child: Ink(
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Text(
+            suggest,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
     );
   }
 

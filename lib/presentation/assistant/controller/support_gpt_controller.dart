@@ -30,13 +30,17 @@ Quier que hables como un Asistente virtual de una applicacion mobile potenciada 
 - Glaucoma
 - uveítis
 
-donde tiene cada json 2 clases "confidence, class", donde confidence es la probabilidad del diagnostico y class es la clase del diagnostico.
+donde tiene cada json 2 clases "probabilidad, clase", 
 
 El conjunto de json es el siguiente
 
 ${controller.getAllJsonsInformacion()}
 
+por favor saca un promedio de los datos ya que fueron 5 fotos diferentes del mismo ojo en distintos angulos
+
 por favor empieza con un "Hola soy el asistente inteligente de "EyeAi", despues de procesar la informacion que nos diste tengo el siguiente pre-diagnostico para ti"
+
+Dame la informacion de manera entendible a un usuario y quiza recomendaciones, no es necesario que me muestres la informacion de las 5 enfermedades, si no de la o las que creas que es mas importante tratar
 ''');
     _response = _response + "/NEWLINE/" + response;
     waitingResponse.value = false;
