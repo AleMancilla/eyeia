@@ -35,6 +35,26 @@ class GlobalController extends GetxController {
     super.dispose();
   }
 
+  List<Map<String, dynamic>> getAllJsonsInformacion() {
+    List<Map<String, dynamic>> listToReturn = [];
+    prediction1?.forEach((element) {
+      listToReturn.add(element.toJsonForChatGPT());
+    });
+    prediction2?.forEach((element) {
+      listToReturn.add(element.toJsonForChatGPT());
+    });
+    prediction3?.forEach((element) {
+      listToReturn.add(element.toJsonForChatGPT());
+    });
+    prediction4?.forEach((element) {
+      listToReturn.add(element.toJsonForChatGPT());
+    });
+    prediction5?.forEach((element) {
+      listToReturn.add(element.toJsonForChatGPT());
+    });
+    return listToReturn;
+  }
+
   Future<List<Prediction>?> makePostRequestWithBase64(
       String base64Contents) async {
     const String apiUrl =
