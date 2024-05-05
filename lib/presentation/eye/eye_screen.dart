@@ -172,32 +172,35 @@ class _EyeScreenState extends State<EyeScreen> {
               child: CustomButtonWidget(
                 textButton: 'SubirImagenes',
                 onTap: () async {
-                  if (controller.imageEyeCenter == null ||
-                      controller.imageEyeUp == null ||
-                      controller.imageEyeButtom == null ||
-                      controller.imageEyeleft == null ||
-                      controller.imageEyeRigth == null) {
+                  // if (controller.imageEyeCenter == null ||
+                  //     controller.imageEyeUp == null ||
+                  //     controller.imageEyeButtom == null ||
+                  //     controller.imageEyeleft == null ||
+                  //     controller.imageEyeRigth == null) {
+                  if (false) {
                     showToastMessage('Por favor complete las fotos');
                   } else {
                     await excecuteProcess(context, () async {
                       controller.imageUrl1 =
                           await uploadImage(controller.imageEyeCenter);
-                      controller.imageUrl2 =
-                          await uploadImage(controller.imageEyeUp);
-                      controller.imageUrl3 =
-                          await uploadImage(controller.imageEyeButtom);
-                      controller.imageUrl4 =
-                          await uploadImage(controller.imageEyeleft);
-                      controller.imageUrl5 =
-                          await uploadImage(controller.imageEyeRigth);
+                      // controller.imageUrl2 =
+                      //     await uploadImage(controller.imageEyeUp);
+                      // controller.imageUrl3 =
+                      //     await uploadImage(controller.imageEyeButtom);
+                      // controller.imageUrl4 =
+                      //     await uploadImage(controller.imageEyeleft);
+                      // controller.imageUrl5 =
+                      //     await uploadImage(controller.imageEyeRigth);
 
                       print(' ========== lista de links ===== ');
                       print(controller.imageUrl1);
-                      print(controller.imageUrl2);
-                      print(controller.imageUrl3);
-                      print(controller.imageUrl4);
-                      print(controller.imageUrl5);
+                      // print(controller.imageUrl2);
+                      // print(controller.imageUrl3);
+                      // print(controller.imageUrl4);
+                      // print(controller.imageUrl5);
                       print(' ========== lista de links ===== ');
+
+                      controller.makePostRequest(controller.imageUrl1!);
                     });
                   }
                 },
@@ -237,21 +240,26 @@ class _EyeScreenState extends State<EyeScreen> {
     if (image != null) {
       return Padding(
         padding: EdgeInsets.all(10),
-        child: DashedBorderContainer(
-          borderRadius: BorderRadius.circular(20),
-          child: Ink(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.transparent,
-            ),
-            width: 150,
-            height: 150,
-            padding: EdgeInsets.all(20),
-            child: Center(
-              child: Image.file(
-                image,
-                width: 150,
-                height: 150,
+        child: InkWell(
+          onTap: () {
+            ontap?.call();
+          },
+          child: DashedBorderContainer(
+            borderRadius: BorderRadius.circular(20),
+            child: Ink(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.transparent,
+              ),
+              width: 150,
+              height: 150,
+              padding: EdgeInsets.all(20),
+              child: Center(
+                child: Image.file(
+                  image,
+                  width: 150,
+                  height: 150,
+                ),
               ),
             ),
           ),
