@@ -175,40 +175,53 @@ class _EyeScreenState extends State<EyeScreen> {
               child: CustomButtonWidget(
                 textButton: 'SubirImagenes',
                 onTap: () async {
-                  // if (controller.imageEyeCenter == null ||
-                  //     controller.imageEyeUp == null ||
-                  //     controller.imageEyeButtom == null ||
-                  //     controller.imageEyeleft == null ||
-                  //     controller.imageEyeRigth == null) {
-                  if (false) {
+                  if (controller.imageEyeCenter == null ||
+                      controller.imageEyeUp == null ||
+                      controller.imageEyeButtom == null ||
+                      controller.imageEyeleft == null ||
+                      controller.imageEyeRigth == null) {
                     showToastMessage('Por favor complete las fotos');
                   } else {
-                    // controller.imageUrl1 =
-                    //     await uploadImage(controller.imageEyeCenter);
-                    if (controller.imageEyeCenter != null) {
-                      final contents =
-                          controller.imageEyeCenter!.readAsBytesSync();
-                      final encondedContents = base64.encode(contents);
-                      controller.makePostRequestWithBase64(encondedContents);
-                    }
-                    // controller.imageUrl2 =
-                    //     await uploadImage(controller.imageEyeUp);
-                    // controller.imageUrl3 =
-                    //     await uploadImage(controller.imageEyeButtom);
-                    // controller.imageUrl4 =
-                    //     await uploadImage(controller.imageEyeleft);
-                    // controller.imageUrl5 =
-                    //     await uploadImage(controller.imageEyeRigth);
-
-                    // print(' ========== lista de links ===== ');
-                    // print(controller.imageUrl1);
-                    // // print(controller.imageUrl2);
-                    // // print(controller.imageUrl3);
-                    // // print(controller.imageUrl4);
-                    // // print(controller.imageUrl5);
-                    // print(' ========== lista de links ===== ');
-
-                    // controller.makePostRequest(controller.imageUrl1!);
+                    excecuteProcess(context, () async {
+                      // controller.imageUrl1 =
+                      //     await uploadImage(controller.imageEyeCenter);
+                      if (controller.imageEyeCenter != null) {
+                        final contents =
+                            controller.imageEyeCenter!.readAsBytesSync();
+                        final encondedContents = base64.encode(contents);
+                        controller.prediction1 = await controller
+                            .makePostRequestWithBase64(encondedContents);
+                      }
+                      if (controller.imageEyeUp != null) {
+                        final contents =
+                            controller.imageEyeUp!.readAsBytesSync();
+                        final encondedContents = base64.encode(contents);
+                        controller.prediction2 = await controller
+                            .makePostRequestWithBase64(encondedContents);
+                      }
+                      // if (controller.imageEyeButtom != null) {
+                      //   final contents =
+                      //       controller.imageEyeButtom!.readAsBytesSync();
+                      //   final encondedContents = base64.encode(contents);
+                      //   controller.prediction3 = await controller
+                      //       .makePostRequestWithBase64(encondedContents);
+                      // }
+                      // if (controller.imageEyeleft != null) {
+                      //   final contents =
+                      //       controller.imageEyeleft!.readAsBytesSync();
+                      //   final encondedContents = base64.encode(contents);
+                      //   controller.prediction4 = await controller
+                      //       .makePostRequestWithBase64(encondedContents);
+                      // }
+                      // if (controller.imageEyeRigth != null) {
+                      //   final contents =
+                      //       controller.imageEyeRigth!.readAsBytesSync();
+                      //   final encondedContents = base64.encode(contents);
+                      //   controller.prediction5 = await controller
+                      //       .makePostRequestWithBase64(encondedContents);
+                      // }
+                      print(controller);
+                    });
                   }
                 },
               ),

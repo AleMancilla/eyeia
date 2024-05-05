@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:eye_ia_detection/domain/mode_ai_eye_disease.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -18,11 +19,11 @@ class GlobalController extends GetxController {
   File? imageEyeleft;
   File? imageEyeRigth;
 
-  String? imageUrl1;
-  String? imageUrl2;
-  String? imageUrl3;
-  String? imageUrl4;
-  String? imageUrl5;
+  List<Prediction>? prediction1;
+  List<Prediction>? prediction2;
+  List<Prediction>? prediction3;
+  List<Prediction>? prediction4;
+  List<Prediction>? prediction5;
 
   @override
   void dispose() {
@@ -34,7 +35,8 @@ class GlobalController extends GetxController {
     super.dispose();
   }
 
-  Future<void> makePostRequestWithBase64(String base64Contents) async {
+  Future<List<Prediction>?> makePostRequestWithBase64(
+      String base64Contents) async {
     const String apiUrl =
         'https://detect.roboflow.com/eye_diseases_detect/1?api_key=eQyFmgr5R9fwiS2vt4uv';
     final response = await http.post(
@@ -52,6 +54,7 @@ class GlobalController extends GetxController {
       // Imprimir la respuesta en la consola.
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
+      return responseFromJson(response.body).predictions;
     } else {
       // Si la solicitud falla, imprimir el mensaje de error.
       throw Exception('Failed to load data');
