@@ -1,8 +1,11 @@
 import 'package:eye_ia_detection/core/theme/custom_colors.dart';
+import 'package:eye_ia_detection/presentation/consultation/consultation_screen.dart';
+import 'package:eye_ia_detection/presentation/global_controller.dart';
 import 'package:eye_ia_detection/presentation/ui/atoms/custom_button_widget.dart';
 import 'package:eye_ia_detection/presentation/ui/atoms/custom_drop_down.dart';
 import 'package:eye_ia_detection/presentation/ui/atoms/custom_text_file.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,11 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
-  final TextEditingController _sexController = TextEditingController();
-  final TextEditingController _municipalityController = TextEditingController();
+  GlobalController controller = Get.put(GlobalController());
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: 30),
               CustomTextFile(
-                controller: _nameController,
+                controller: controller.nameController,
                 hintText: "Nombre",
                 labelText: "Nombre",
               ),
               SizedBox(height: 20),
               CustomTextFile(
-                controller: _ageController,
+                controller: controller.ageController,
                 hintText: 'Edad',
                 labelText: 'Edad',
                 keyboardType: TextInputType.number,
@@ -68,18 +67,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   selectedItem: getDropDownValue(),
                   borderColor: CustomColors.primary,
                   onChanged: (value) {
-                    _cityController.text = (value ?? '_');
+                    controller.cityController.text = (value ?? '_');
                     setState(() {});
                   }),
               SizedBox(height: 20),
               CustomTextFile(
-                controller: _sexController,
+                controller: controller.sexController,
                 hintText: 'Sexo',
                 labelText: 'Sexo',
               ),
               SizedBox(height: 20),
               CustomTextFile(
-                controller: _municipalityController,
+                controller: controller.municipalityController,
                 hintText: 'Municipio',
                 labelText: 'Municipio',
               ),
@@ -87,7 +86,10 @@ class _HomeScreenState extends State<HomeScreen> {
               CustomButtonWidget(
                 textButton: 'Continuar',
                 onTap: () {
-                  // controller.submitAppointment();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ConsultationScreen()));
                 },
               ),
             ],
@@ -98,19 +100,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String? getDropDownValue() {
-    if (_cityController.text == '') {
+    if (controller.cityController.text == '') {
       return null;
     }
-    return _cityController.text;
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _ageController.dispose();
-    _cityController.dispose();
-    _sexController.dispose();
-    _municipalityController.dispose();
-    super.dispose();
+    return controller.cityController.text;
   }
 }
