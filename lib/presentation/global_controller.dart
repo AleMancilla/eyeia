@@ -34,6 +34,30 @@ class GlobalController extends GetxController {
     super.dispose();
   }
 
+  Future<void> makePostRequestWithBase64(String base64Contents) async {
+    const String apiUrl =
+        'https://detect.roboflow.com/eye_diseases_detect/1?api_key=eQyFmgr5R9fwiS2vt4uv';
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: base64Contents,
+    );
+    print(response);
+    print('==');
+    print(response.body);
+    if (response.statusCode == 200) {
+      // Si la solicitud es exitosa (código de estado 201),
+      // Imprimir la respuesta en la consola.
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    } else {
+      // Si la solicitud falla, imprimir el mensaje de error.
+      throw Exception('Failed to load data');
+    }
+  }
+
   Future<void> makePostRequest(String imageUrl) async {
     final String apiUrl =
         'https://detect.roboflow.com/eye_diseases_detect/1?api_key=eQyFmgr5R9fwiS2vt4uv&image=$imageUrl';

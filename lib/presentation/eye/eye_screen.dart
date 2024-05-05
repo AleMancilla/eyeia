@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:eye_ia_detection/core/utils/utils.dart';
@@ -45,7 +46,10 @@ class _EyeScreenState extends State<EyeScreen> {
       Reference storageReference =
           FirebaseStorage.instance.ref().child('images/$fileName');
       UploadTask uploadTask = storageReference.putFile(
-          compressedImageFile, SettableMetadata(contentType: ' image/jpeg'));
+          compressedImageFile,
+          SettableMetadata(
+            contentType: 'image/jpeg',
+          ));
       await uploadTask.whenComplete(() => print('Image uploaded'));
 
       // Obtener la URL de descarga de la imagen
@@ -101,9 +105,8 @@ class _EyeScreenState extends State<EyeScreen> {
                 image: controller.imageEyeCenter,
                 ontap: () async {
                   print(' ----- ');
-                  await excecuteProcess(context, () async {
-                    controller.imageEyeCenter = await getImage();
-                  });
+                  controller.imageEyeCenter = await getImage();
+
                   setState(() {});
                 },
               ),
@@ -180,28 +183,32 @@ class _EyeScreenState extends State<EyeScreen> {
                   if (false) {
                     showToastMessage('Por favor complete las fotos');
                   } else {
-                    await excecuteProcess(context, () async {
-                      controller.imageUrl1 =
-                          await uploadImage(controller.imageEyeCenter);
-                      // controller.imageUrl2 =
-                      //     await uploadImage(controller.imageEyeUp);
-                      // controller.imageUrl3 =
-                      //     await uploadImage(controller.imageEyeButtom);
-                      // controller.imageUrl4 =
-                      //     await uploadImage(controller.imageEyeleft);
-                      // controller.imageUrl5 =
-                      //     await uploadImage(controller.imageEyeRigth);
+                    // controller.imageUrl1 =
+                    //     await uploadImage(controller.imageEyeCenter);
+                    if (controller.imageEyeCenter != null) {
+                      final contents =
+                          controller.imageEyeCenter!.readAsBytesSync();
+                      final encondedContents = base64.encode(contents);
+                      controller.makePostRequestWithBase64(encondedContents);
+                    }
+                    // controller.imageUrl2 =
+                    //     await uploadImage(controller.imageEyeUp);
+                    // controller.imageUrl3 =
+                    //     await uploadImage(controller.imageEyeButtom);
+                    // controller.imageUrl4 =
+                    //     await uploadImage(controller.imageEyeleft);
+                    // controller.imageUrl5 =
+                    //     await uploadImage(controller.imageEyeRigth);
 
-                      print(' ========== lista de links ===== ');
-                      print(controller.imageUrl1);
-                      // print(controller.imageUrl2);
-                      // print(controller.imageUrl3);
-                      // print(controller.imageUrl4);
-                      // print(controller.imageUrl5);
-                      print(' ========== lista de links ===== ');
+                    // print(' ========== lista de links ===== ');
+                    // print(controller.imageUrl1);
+                    // // print(controller.imageUrl2);
+                    // // print(controller.imageUrl3);
+                    // // print(controller.imageUrl4);
+                    // // print(controller.imageUrl5);
+                    // print(' ========== lista de links ===== ');
 
-                      controller.makePostRequest(controller.imageUrl1!);
-                    });
+                    // controller.makePostRequest(controller.imageUrl1!);
                   }
                 },
               ),
