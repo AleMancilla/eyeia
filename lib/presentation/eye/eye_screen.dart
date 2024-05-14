@@ -28,7 +28,9 @@ class _EyeScreenState extends State<EyeScreen> {
 
   Future<File?> getImage() async {
     final pickedFile = await picker.getImage(
-        source: ImageSource.camera, preferredCameraDevice: CameraDevice.front);
+      source: ImageSource.camera,
+      preferredCameraDevice: CameraDevice.front,
+    );
 
     if (pickedFile != null) {
       return File(pickedFile.path);

@@ -17,6 +17,7 @@ class ProfessionalModel {
   String? especializacion;
   String? direccion;
   String? descripcion;
+  String? cel;
 
   ProfessionalModel({
     this.imagen,
@@ -24,6 +25,7 @@ class ProfessionalModel {
     this.especializacion,
     this.direccion,
     this.descripcion,
+    this.cel,
   });
 
   factory ProfessionalModel.fromJson(Map<String, dynamic> json) =>
@@ -33,6 +35,7 @@ class ProfessionalModel {
         especializacion: json["especializacion"],
         direccion: json["direccion"],
         descripcion: json["descripcion"],
+        cel: json["cel"],
       );
 
   Map<String, dynamic> toJson() => {

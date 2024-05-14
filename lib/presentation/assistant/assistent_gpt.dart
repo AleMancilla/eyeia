@@ -5,6 +5,9 @@ import 'package:eye_ia_detection/presentation/ui/organisms/item_product_widget.d
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+
+import 'package:url_launcher/url_launcher.dart';
 
 class AssistentGpt extends StatefulWidget {
   AssistentGpt({super.key});
@@ -56,7 +59,16 @@ class _SupportGptScreenState extends State<AssistentGpt> {
                                   isMinimunVersion: true,
                                   imageUrl: product.imagen,
                                   name: product.nombre ?? '_',
-                                  ontap: () {
+                                  ontap: () async {
+                                    final link = WhatsAppUnilink(
+                                      phoneNumber: product.cel,
+                                      text:
+                                          "Hola, hice mi pre-consulta en la app EyeAi, y quisiera agendar una cita para una consulta mas precisa",
+                                    );
+                                    // Convert the WhatsAppUnilink instance to a Uri.
+                                    // The "launch" method is part of "url_launcher".
+                                    await launchUrl(link.asUri());
+
                                     // Navigator.push(
                                     //   context,
                                     //   MaterialPageRoute<void>(
@@ -75,12 +87,23 @@ class _SupportGptScreenState extends State<AssistentGpt> {
               // CustomLoadingWidget(),
               if (gptController.listMessageToShow.length > 0)
                 SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      suggestWidget(
-                          'Puedes ayudarme a contactar especialistas?'),
-                      suggestWidget(
-                          'Quiero que me des recomendaciones sobre cuidados'),
+                      suggestWidget('Contactar especialistas', ontap: () {
+                        gptController.listOfProductsSuggest.value =
+                            gptController.chargeDataSuggest();
+                      }),
+                      suggestWidget('Recomendaciones sobre cuidados',
+                          ontap: () {
+                        gptController.sendMessage(
+                            'Quiero que me des recomendaciones sobre cuidados que debo tener');
+                      }),
+                      suggestWidget('Mas informacion sobre mi diagnostico',
+                          ontap: () {
+                        gptController.sendMessage(
+                            'Mas informacion sobre mi diagnostico');
+                      }),
                     ],
                   ),
                 ),
@@ -102,26 +125,36 @@ class _SupportGptScreenState extends State<AssistentGpt> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'El asistente potenciado con inteligencia artificial no tiene la palabra final, se recomienda siempre contactar con un especialista',
+                  style: TextStyle(fontSize: 10),
+                ),
+              )
             ],
           )),
     );
   }
 
-  Widget suggestWidget(String suggest) {
+  Widget suggestWidget(String suggest, {Function? ontap}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: InkWell(
         onTap: () {
-          gptController.addWidgetMessage('user', suggest);
+          ontap?.call();
         },
         child: Ink(
           decoration: BoxDecoration(
             color: Colors.blue,
             borderRadius: BorderRadius.circular(5),
           ),
-          child: Text(
-            suggest,
-            style: TextStyle(color: Colors.white),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              suggest,
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),

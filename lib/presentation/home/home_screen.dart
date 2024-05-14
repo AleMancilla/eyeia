@@ -71,6 +71,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     setState(() {});
                   }),
               SizedBox(height: 20),
+              CustomDropdown(
+                  items: [
+                    "HOMBRE",
+                    "MUJER",
+                    "OTRO",
+                  ],
+                  hintText: 'Seleccione una opcion',
+                  selectedItem: getDropDownValueSex(),
+                  borderColor: CustomColors.primary,
+                  onChanged: (value) {
+                    controller.sexController.text = (value ?? '_');
+                    setState(() {});
+                  }),
+              SizedBox(height: 20),
               CustomTextFile(
                 controller: controller.sexController,
                 hintText: 'Sexo',
@@ -104,5 +118,12 @@ class _HomeScreenState extends State<HomeScreen> {
       return null;
     }
     return controller.cityController.text;
+  }
+
+  String? getDropDownValueSex() {
+    if (controller.sexController.text == '') {
+      return null;
+    }
+    return controller.sexController.text;
   }
 }
